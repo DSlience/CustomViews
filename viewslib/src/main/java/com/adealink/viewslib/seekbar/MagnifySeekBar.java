@@ -74,7 +74,6 @@ public class MagnifySeekBar<T extends Number> extends BaseSeekBar<T> {
         //放大镜圆
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         float radius = mMagnifierBmp.getWidth() / 2 * 138 / 152;//PixelUtil.dpToPx(mContext, RADIUS_IN_DP);//放大镜圆的半径
-        //IYourCarLog.d("d_slience", "放大镜圆半径：" + radius);
         Path path = new Path();
         float circleMidY = getHeight() - THUMB_HEIGHT - mMagnifierBmp.getHeight() / 2;
         canvas.drawBitmap(mMagnifierBmp, normalizedToScreen(magnifierPosX) - mMagnifierBmp.getWidth() / 2, circleMidY - mMagnifierBmp.getHeight() / 2, mPaint);
@@ -88,7 +87,6 @@ public class MagnifySeekBar<T extends Number> extends BaseSeekBar<T> {
         canvas.scale(ZOOM_FACTOR, ZOOM_FACTOR);
 
         drawCustomView(canvas);
-
     }
 
 }
