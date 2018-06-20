@@ -10,7 +10,7 @@ import com.adealink.customviews.dagger.module.MagnifySeekBarModule;
 import com.adealink.customviews.listener.PriceSelectorChangeListener;
 import com.adealink.customviews.presenter.MagnifySeekBarPresenter;
 import com.adealink.customviews.view.MagnifySeekBarView;
-import com.adealink.viewslib.seekbar.RangeSeekBar;
+import com.adealink.viewslib.seekbar.BaseSeekBar;
 
 import butterknife.BindView;
 
@@ -20,8 +20,10 @@ import butterknife.BindView;
 public class MagnifySeekBarActivity extends BaseMvpActivity<MagnifySeekBarView, MagnifySeekBarPresenter>
         implements MagnifySeekBarView {
 
-    @BindView(R.id.price_seekbar)
-    RangeSeekBar mPriceSeekBar;//价格SeekBar
+    @BindView(R.id.magnify_seekbar)
+    BaseSeekBar mMagnifySeekBar;//价格SeekBar
+    @BindView(R.id.range_seekbar)
+    BaseSeekBar mRangeeSeekBar;
     @BindView(R.id.price_tag_tv)
     TextView mPriceTagTv;//价格指示文字
 
@@ -44,17 +46,34 @@ public class MagnifySeekBarActivity extends BaseMvpActivity<MagnifySeekBarView, 
     protected void setUpViewAndData() {
         setContentView(R.layout.activity_magnify_seek_bar);
 
-        float minPrice = 0f;
-        float maxPrice = 55f;
-        mPriceSeekBar.setSelectedMinValue(minPrice);
-        mPriceSeekBar.setSelectedMaxValue(maxPrice);
-
-        PriceSelectorChangeListener mPriceSelectorChangeListener = new PriceSelectorChangeListener(this, mPriceTagTv);
-        //初始化价格选择器
-        mPriceSeekBar.resetPressedThumb();
-        mPriceSeekBar.setOnRangeSeekBarChangeListener(mPriceSelectorChangeListener);
-        mPriceSelectorChangeListener.showPriceTag(minPrice, maxPrice);
+        initMagnifySeekBar();
+        initRangeSeekBar();
     }
 
+    private void initMagnifySeekBar() {
+        float minPrice = 0f;
+        float maxPrice = 55f;
+        mMagnifySeekBar.setSelectedMinValue(minPrice);
+        mMagnifySeekBar.setSelectedMaxValue(maxPrice);
+
+        PriceSelectorChangeListener listener = new PriceSelectorChangeListener(this, mPriceTagTv);
+        //初始化价格选择器
+        mMagnifySeekBar.resetPressedThumb();
+        mMagnifySeekBar.setOnRangeSeekBarChangeListener(listener);
+        listener.showPriceTag(minPrice, maxPrice);
+    }
+
+    private void initRangeSeekBar() {
+        float minPrice = 0f;
+        float maxPrice = 55f;
+        mRangeeSeekBar.setSelectedMinValue(minPrice);
+        mRangeeSeekBar.setSelectedMaxValue(maxPrice);
+
+        PriceSelectorChangeListener listener = new PriceSelectorChangeListener(this, mPriceTagTv);
+        //初始化价格选择器
+        mRangeeSeekBar.resetPressedThumb();
+        mRangeeSeekBar.setOnRangeSeekBarChangeListener(listener);
+        listener.showPriceTag(minPrice, maxPrice);
+    }
 
 }

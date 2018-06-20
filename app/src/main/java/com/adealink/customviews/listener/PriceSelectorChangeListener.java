@@ -6,13 +6,13 @@ import android.widget.TextView;
 
 import com.adealink.baselib.utils.LogUtil;
 import com.adealink.customviews.R;
-import com.adealink.viewslib.seekbar.RangeSeekBar;
+import com.adealink.viewslib.seekbar.BaseSeekBar;
 
 /**
  * 条件选车-价格区间选择的监听器
  * Created by Xuefu_Du on 2016/12/21.
  */
-public class PriceSelectorChangeListener implements RangeSeekBar.OnRangeSeekBarChangeListener<Float> {
+public class PriceSelectorChangeListener implements BaseSeekBar.OnRangeSeekBarChangeListener<Float> {
 
     private TextView mPriceTagTv;//显示价格的TextView
     private Context mContext;
@@ -30,9 +30,9 @@ public class PriceSelectorChangeListener implements RangeSeekBar.OnRangeSeekBarC
     }
 
     @Override
-    public void onRangeSeekBarValuesChanged(RangeSeekBar<?> seekBar, Float minValue, Float maxValue, int changeType) {
+    public void onRangeSeekBarValuesChanged(BaseSeekBar<?> seekBar, Float minValue, Float maxValue, int changeType) {
         //处理显示UI--调整最大最小值的间距
-        handlePriceInterval((RangeSeekBar<Float>) seekBar, minValue, maxValue);
+        handlePriceInterval((BaseSeekBar<Float>) seekBar, minValue, maxValue);
 
         //接下来，从seekBar中获取值，以保证值为最新
         float minPrice = (Float) seekBar.getSelectedMinValue();
@@ -40,7 +40,7 @@ public class PriceSelectorChangeListener implements RangeSeekBar.OnRangeSeekBarC
         float maxPrice = (Float) seekBar.getSelectedMaxValue();
         int max = turnFloatToInt(maxPrice);
         //价格选择完成--to筛选
-        if (changeType == RangeSeekBar.BAR_CHANGE_WHEN_ACTION_UP) {
+        if (changeType == BaseSeekBar.BAR_CHANGE_WHEN_ACTION_UP) {
             postEventBus(min, max);
         }
         showPriceTag(min, max);
@@ -92,7 +92,7 @@ public class PriceSelectorChangeListener implements RangeSeekBar.OnRangeSeekBarC
     }
 
     //处理价格区间过小的情况
-    private void handlePriceInterval(RangeSeekBar<Float> seekBar, Float minValue, Float maxValue) {
+    private void handlePriceInterval(BaseSeekBar<Float> seekBar, Float minValue, Float maxValue) {
         float minPrice = minValue;
         float maxPrice = maxValue;
         if (Math.abs(maxPrice - minPrice) < 5) {
