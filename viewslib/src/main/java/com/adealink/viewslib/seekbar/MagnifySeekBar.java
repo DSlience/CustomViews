@@ -77,7 +77,7 @@ public class MagnifySeekBar<T extends Number> extends BaseSeekBar<T> {
         //IYourCarLog.d("d_slience", "放大镜圆半径：" + radius);
         Path path = new Path();
         float circleMidY = getHeight() - THUMB_HEIGHT - mMagnifierBmp.getHeight() / 2;
-        canvas.drawBitmap(mMagnifierBmp, normalizedToScreen(magnifierPosX) - mMagnifierBmp.getWidth() / 2, circleMidY - mMagnifierBmp.getHeight() / 2, paint);
+        canvas.drawBitmap(mMagnifierBmp, normalizedToScreen(magnifierPosX) - mMagnifierBmp.getWidth() / 2, circleMidY - mMagnifierBmp.getHeight() / 2, mPaint);
         path.addCircle(normalizedToScreen(magnifierPosX), circleMidY, radius, Path.Direction.CW);
         canvas.clipPath(path);
         //矩阵变换画布

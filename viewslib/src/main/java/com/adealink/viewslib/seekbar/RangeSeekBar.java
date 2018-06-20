@@ -77,21 +77,21 @@ public class RangeSeekBar<T extends Number> extends BaseSeekBar<T> {
         }
 
         //绘制圆形
-        paint.setColor(getResources().getColor(R.color.color_c1));
+        mPaint.setColor(getResources().getColor(R.color.color_c1));
         float radius = PixelUtil.dpToPx(mContext, OVERLAY_CIRCLE_RADIUS_IN_DP);
         float thumbToCalibration = PixelUtil.dpToPx(mContext, THUMB_TO_CALIBRATION_IN_DP);//按钮顶到刻度底
         float circleMidY = getHeight() - THUMB_HEIGHT - thumbToCalibration - radius;
-        canvas.drawCircle(normalizedToScreen(magnifierPosX), circleMidY, radius, paint);
+        canvas.drawCircle(normalizedToScreen(magnifierPosX), circleMidY, radius, mPaint);
 
         //绘制显示文字
-        paint.setColor(getResources().getColor(R.color.color_g7));
-        paint.setFakeBoldText(true);
+        mPaint.setColor(getResources().getColor(R.color.color_g7));
+        mPaint.setFakeBoldText(true);
         float textSize = PixelUtil.dpToPx(mContext, OVERLAY_TEXT_IN_DP);//刻度文字大小
-        paint.setTextSize(textSize);
-        paint.setTextAlign(Paint.Align.CENTER);
-        Paint.FontMetricsInt fontMetrics = paint.getFontMetricsInt();
+        mPaint.setTextSize(textSize);
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        Paint.FontMetricsInt fontMetrics = mPaint.getFontMetricsInt();
         float baseline = circleMidY + (fontMetrics.bottom - fontMetrics.top) / 2 - fontMetrics.bottom;
-        canvas.drawText("" + selectedValue, normalizedToScreen(magnifierPosX), baseline, paint);
+        canvas.drawText("" + selectedValue, normalizedToScreen(magnifierPosX), baseline, mPaint);
     }
 
 }

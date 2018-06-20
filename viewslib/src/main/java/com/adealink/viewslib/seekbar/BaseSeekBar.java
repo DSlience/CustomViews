@@ -41,10 +41,10 @@ public abstract class BaseSeekBar<T extends Number> extends ImageView {
     protected final int LINE_HEIGHT_IN_DP = 4;//进度条线的高度
     protected final float ZOOM_FACTOR = 1.6f;//放大倍数
 
-    protected final Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    private final Bitmap thumbImage = BitmapFactory.decodeResource(getResources(), R.mipmap.btn_carc_screen_handle);
-    private final float HALF_THUMB_WIDTH = 0.5f * thumbImage.getWidth();
-    protected final float THUMB_HEIGHT = thumbImage.getHeight();
+    protected final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    private final Bitmap mThumbBmp = BitmapFactory.decodeResource(getResources(), R.mipmap.btn_carc_screen_handle);
+    private final float HALF_THUMB_WIDTH = 0.5f * mThumbBmp.getWidth();
+    protected final float THUMB_HEIGHT = mThumbBmp.getHeight();
     private T absoluteMinValue, absoluteMaxValue;
     private NumberType numberType;
     private double absoluteMinValuePrim, absoluteMaxValuePrim;
@@ -388,14 +388,14 @@ public abstract class BaseSeekBar<T extends Number> extends ImageView {
 
     //draw刻度、进度条等
     protected void drawCustomView(Canvas canvas) {
-        //set paint
-        paint.setStyle(Paint.Style.FILL);
-        paint.setAntiAlias(true);
+        //set mPaint
+        mPaint.setStyle(Paint.Style.FILL);
+        mPaint.setAntiAlias(true);
 
         // draw calibration line
         mGapPaddingLeft = HALF_THUMB_WIDTH + getPaddingLeft();
-        paint.setColor(getResources().getColor(R.color.color_g4plus));//刻度线颜色
-        paint.setStrokeWidth(PixelUtil.dpToPx(mContext, CALIBRATION_WIDTH_IN_DP));
+        mPaint.setColor(getResources().getColor(R.color.color_g4plus));//刻度线颜色
+        mPaint.setStrokeWidth(PixelUtil.dpToPx(mContext, CALIBRATION_WIDTH_IN_DP));
         float gap = (getWidth() - 2 * mGapPaddingLeft) / 55;
         float thumbToCalibration = PixelUtil.dpToPx(mContext, THUMB_TO_CALIBRATION_IN_DP);//按钮顶到刻度底
         float calibrationHeight = PixelUtil.dpToPx(mContext, CALIBRATION_HEIGHT_IN_DP);//刻度线高度
@@ -403,7 +403,7 @@ public abstract class BaseSeekBar<T extends Number> extends ImageView {
             if (i != 0 && i % 5 == 0) {
                 float startX = gap * i + mGapPaddingLeft;
                 float startY = getHeight() - THUMB_HEIGHT - thumbToCalibration;
-                canvas.drawLine(startX, startY, startX, startY - calibrationHeight, paint);
+                canvas.drawLine(startX, startY, startX, startY - calibrationHeight, mPaint);
             }
         }
         // draw calibration text
@@ -412,17 +412,17 @@ public abstract class BaseSeekBar<T extends Number> extends ImageView {
         float textZeroStartX = mGapPaddingLeft + 5 * gap - textSize / 2;
         float calibrationToText = PixelUtil.dpToPx(mContext, CALIBRATION_TO_TEXT_IN_DP);//刻度顶到文字底
         float textBaselineY = getHeight() - THUMB_HEIGHT - thumbToCalibration - calibrationToText - calibrationHeight;
-        paint.setTextSize(textSize);
-        paint.setColor(getResources().getColor(R.color.color_g1));//刻度文字颜色
-        paint.setFakeBoldText(true);
-        paint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setTextSize(textSize);
+        mPaint.setColor(getResources().getColor(R.color.color_g1));//刻度文字颜色
+        mPaint.setFakeBoldText(true);
+        mPaint.setTextAlign(Paint.Align.CENTER);
         for (int i = 0; i < 10; i++) {
             int textValue = 5 * (i + 1);
-            canvas.drawText("" + textValue, textGap * i + textZeroStartX + textSize / 2, textBaselineY, paint);
+            canvas.drawText("" + textValue, textGap * i + textZeroStartX + textSize / 2, textBaselineY, mPaint);
         }
         // draw seek bar background line
         float progressBarHeight = PixelUtil.dpToPx(mContext, LINE_HEIGHT_IN_DP);//进度条高度
-        paint.setColor(getResources().getColor(R.color.color_g5));//进度条背景色
+        mPaint.setColor(getResources().getColor(R.color.color_g5));//进度条背景色
         float rectRight = getWidth() - mGapPaddingLeft;
         if (mRect == null) {
             float rectTop = getHeight() - THUMB_HEIGHT - thumbToCalibration / 2 - progressBarHeight / 2;//进度条top边
@@ -431,13 +431,13 @@ public abstract class BaseSeekBar<T extends Number> extends ImageView {
         mRect.left = mGapPaddingLeft;
         mRect.right = rectRight;
         int roundCorner = getResources().getDimensionPixelSize(R.dimen.dimen_50dp);//进度条圆角
-        canvas.drawRoundRect(mRect, roundCorner, roundCorner, paint);
+        canvas.drawRoundRect(mRect, roundCorner, roundCorner, mPaint);
 
         // draw seek bar active range line
         mRect.left = normalizedToScreen(normalizedMinValue);
         mRect.right = normalizedToScreen(normalizedMaxValue);
-        paint.setColor(getResources().getColor(R.color.color_c1));//进度条颜色
-        canvas.drawRoundRect(mRect, roundCorner, roundCorner, paint);
+        mPaint.setColor(getResources().getColor(R.color.color_c1));//进度条颜色
+        canvas.drawRoundRect(mRect, roundCorner, roundCorner, mPaint);
     }
 
     /**
@@ -484,8 +484,8 @@ public abstract class BaseSeekBar<T extends Number> extends ImageView {
      * @param canvas      The canvas to draw upon.
      */
     private void drawThumb(float screenCoord, Canvas canvas) {
-        Bitmap buttonToDraw = thumbImage;
-        canvas.drawBitmap(buttonToDraw, screenCoord - HALF_THUMB_WIDTH, getHeight() - THUMB_HEIGHT, paint);
+        Bitmap buttonToDraw = mThumbBmp;
+        canvas.drawBitmap(buttonToDraw, screenCoord - HALF_THUMB_WIDTH, getHeight() - THUMB_HEIGHT, mPaint);
     }
 
     /**
