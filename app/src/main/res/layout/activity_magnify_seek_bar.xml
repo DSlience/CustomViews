@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:background="@color/color_g5"
+        android:paddingLeft="@dimen/gap_start_end"
+        android:paddingRight="@dimen/gap_start_end">
+
+        <!--条件类型名-->
+        <TextView
+            android:id="@+id/cond_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="@dimen/dimen_48dp"
+            android:singleLine="true"
+            android:textColor="@color/color_g1"
+            android:textSize="@dimen/dimen_13sp"
+            android:textStyle="bold"
+            tools:text="价格区间" />
+
+        <!--选中价格展示-->
+        <TextView
+            android:id="@+id/price_tag_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dimen_10dp"
+            android:singleLine="true"
+            android:text="@string/total"
+            android:textColor="@color/color_c1"
+            android:textSize="@dimen/dimen_13sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <com.adealink.viewslib.seekbar.RangeSeekBar
+        android:id="@+id/price_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/gap_start_end"
+        android:paddingRight="@dimen/gap_start_end"
+        app:absoluteMaxValue="55.00"
+        app:absoluteMinValue="0.00" />
+
+</LinearLayout>

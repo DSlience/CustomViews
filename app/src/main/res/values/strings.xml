@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Custom Views</string>
+
+    <string name="car_conformed_not_found">未找到符合条件的车系</string>
+    <string name="price_html_four">%s万以上</string>
+    <string name="price_html_five">%s万</string>
+    <string name="total">全部</string>
+
+</resources>
