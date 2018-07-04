@@ -22,6 +22,18 @@
             android:textSize="@dimen/dimen_14sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_10dp"
+            android:background="@drawable/color_c1_c1d_corners_50dp_selector"
+            android:gravity="center"
+            android:minHeight="@dimen/dimen_44dp"
+            android:onClick="goViewFlipper"
+            android:text="ViewFlipper view reuse"
+            android:textColor="@color/color_g7"
+            android:textSize="@dimen/dimen_14sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </ScrollView>

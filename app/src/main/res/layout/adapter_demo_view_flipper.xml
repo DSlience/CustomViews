@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/msg_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="@dimen/dimen_6dp"
+    android:paddingLeft="@dimen/dimen_15dp"
+    android:paddingRight="@dimen/dimen_15dp"
+    android:paddingTop="@dimen/dimen_6dp">
+
+    <TextView
+        android:id="@+id/msg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:singleLine="true"
+        android:textColor="@color/color_g2plus"
+        android:textSize="@dimen/dimen_12sp"
+        tools:text="金九银十，买车促销活动正式开始！" />
+</LinearLayout>

@@ -25,6 +25,10 @@
             android:name=".activity.MagnifySeekBarActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".activity.ViewFlipperActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -19,4 +19,8 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, MagnifySeekBarActivity.class));
     }
 
+    public void goViewFlipper(View view) {
+        startActivity(new Intent(this, ViewFlipperActivity.class));
+    }
+
 }

@@ -7,5 +7,12 @@
         <attr name="absoluteMaxValue" format="integer|float" />
     </declare-styleable>
 
+    <!--跑马灯控件-->
+    <declare-styleable name="MarqueeView">
+        <attr name="marqueeInterval" format="integer" />
+        <attr name="marqueeAnimDuration" format="integer" />
+        <attr name="marqueeAnimIn" format="reference" />
+        <attr name="marqueeAnimOut" format="reference" />
+    </declare-styleable>
 
 </resources>
