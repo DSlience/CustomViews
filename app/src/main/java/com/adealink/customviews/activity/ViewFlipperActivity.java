@@ -31,7 +31,7 @@ public class ViewFlipperActivity extends BaseActivity {
         adapter.setDataList(getAdapterDataList());
         mMsgMarquee.setAdapter(adapter);
         mMsgMarquee.start();
-        mMsgMarquee.startFlipping();
+//        mMsgMarquee.startFlipping();
     }
 
     private List<String> getAdapterDataList() {

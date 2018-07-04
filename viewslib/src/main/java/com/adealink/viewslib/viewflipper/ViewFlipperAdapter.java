@@ -34,6 +34,7 @@ public abstract class ViewFlipperAdapter<T> {
     }
 
     public View getView(int position, ViewFlipper viewFlipper) {
+//        View view = viewFlipper.getChildAt(viewFlipper.getDisplayedChild());
         View view = viewFlipper.getChildAt((viewFlipper.getDisplayedChild() + 1) % 2);
         return updateView(position, view);
     }

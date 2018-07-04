@@ -24,7 +24,6 @@ public class MarqueeViewFlipper extends ViewFlipper {
 
     private int mInterval = 2500;
     private int mAnimDuration = 500;
-    private boolean mIsAnimStart;
     private int mPosition;
     private ViewFlipperAdapter mAdapter;
 
@@ -44,32 +43,7 @@ public class MarqueeViewFlipper extends ViewFlipper {
         typedArray.recycle();
 
         setFlipInterval(mInterval);
-        setInAndOutAnimation(mInAnimResId, mOutAnimResId);
-        if (getInAnimation() != null) {
-            getInAnimation().setAnimationListener(new Animation.AnimationListener() {
-                @Override
-                public void onAnimationStart(Animation animation) {
-                    if (mIsAnimStart) {
-                        animation.cancel();
-                    }
-                    mIsAnimStart = true;
-                }
 
-                @Override
-                public void onAnimationEnd(Animation animation) {
-                    mPosition++;
-                    if (mPosition >= mAdapter.getCount()) {
-                        mPosition = 0;
-                    }
-                    addItemView(mPosition);
-                    mIsAnimStart = false;
-                }
-
-                @Override
-                public void onAnimationRepeat(Animation animation) {
-                }
-            });
-        }
     }
 
     public void setAdapter(ViewFlipperAdapter adapter) {
@@ -82,6 +56,31 @@ public class MarqueeViewFlipper extends ViewFlipper {
 
         mPosition = 0;
         addItemView(mPosition);
+        if (mAdapter.getCount() > 1) {
+            setInAndOutAnimation(mInAnimResId, mOutAnimResId);
+            startFlipping();
+        }
+
+        if (getInAnimation() != null) {
+            getInAnimation().setAnimationListener(new Animation.AnimationListener() {
+                @Override
+                public void onAnimationStart(Animation animation) {
+                }
+
+                @Override
+                public void onAnimationEnd(Animation animation) {
+                    mPosition++;
+                    if (mPosition >= mAdapter.getCount()) {
+                        mPosition = 0;
+                    }
+                    addItemView(mPosition);
+                }
+
+                @Override
+                public void onAnimationRepeat(Animation animation) {
+                }
+            });
+        }
     }
 
     private void addItemView(int position) {
