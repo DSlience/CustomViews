@@ -43,23 +43,7 @@ public class MarqueeViewFlipper extends ViewFlipper {
         typedArray.recycle();
 
         setFlipInterval(mInterval);
-
-    }
-
-    public void setAdapter(ViewFlipperAdapter adapter) {
-        mAdapter = adapter;
-    }
-
-    public void start() {
-        removeAllViews();
-        clearAnimation();
-
-        mPosition = 0;
-        addItemView(mPosition);
-        if (mAdapter.getCount() > 1) {
-            setInAndOutAnimation(mInAnimResId, mOutAnimResId);
-            startFlipping();
-        }
+        setInAndOutAnimation(mInAnimResId, mOutAnimResId);
 
         if (getInAnimation() != null) {
             getInAnimation().setAnimationListener(new Animation.AnimationListener() {
@@ -80,6 +64,22 @@ public class MarqueeViewFlipper extends ViewFlipper {
                 public void onAnimationRepeat(Animation animation) {
                 }
             });
+        }
+
+    }
+
+    public void setAdapter(ViewFlipperAdapter adapter) {
+        mAdapter = adapter;
+    }
+
+    public void start() {
+        stopFlipping();
+        removeAllViews();
+
+        mPosition = 0;
+        addItemView(mPosition);
+        if (mAdapter.getCount() > 1) {
+            startFlipping();
         }
     }
 
